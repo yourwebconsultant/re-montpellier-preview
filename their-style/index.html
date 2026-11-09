@@ -1,0 +1,289 @@
+<!doctype html>
+<html lang="en-US"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Montpellier landing page – existing style</title>
+<meta name="robots" content="noindex, nofollow">
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Georama:wght@400;600&family=Inter:wght@100..900&display=swap" rel="stylesheet">
+<style>
+/* ---- Mock of Rail Europe global styles (hostile on purpose) ---- */
+body { margin:0; font-family: Inter, Arial, sans-serif; color:#3F3F3F; background:#fff; }
+p, li, span { font-family: Georama, Arial, sans-serif; color:#4F5D64; font-size:15px; }
+h2 { font-family: Georama; font-size: 22px; color:#22282B; margin: 40px 0; }
+h3 { font-size: 14px; text-transform: uppercase; }
+ul, ol { list-style: disc; padding-left: 40px; }
+a { color:#EB0055; text-decoration: underline; }
+/* ---- Mock CMS shell ---- */
+.mock-header { position:fixed; inset:0 0 auto 0; height:48px; z-index:10; background:#fff; border-bottom:1px solid #e6e6ea;
+  display:flex; align-items:center; gap:28px; padding:0 32px; font:600 15px Inter, Arial, sans-serif; color:#16181D; }
+.mock-header b { color:#EB0055; font-weight:800; font-size:18px; letter-spacing:-.02em; }
+.mock-main { margin-top:48px; }
+.mock-hero { min-height:41rem; height:790px; display:flex; background-size:cover; background-position:center;
+  background-image: linear-gradient(rgba(0,0,0,0), rgba(0,0,0,.8)), url(../images/montpellier-hero-cms.jpg); }
+.mock-hero .w { width:100%; max-width:1440px; margin:0 auto; padding:80px 32px; box-sizing:border-box; display:flex; align-items:flex-end; }
+.mock-hero h1 { margin:0; max-width:36rem; color:#fff; font:600 60px/68px Inter, Arial, sans-serif; }
+.mock-footer { padding:56px 32px; background:#16181D; color:#fff; font:14px Inter, Arial, sans-serif; text-align:center; }
+@media (max-width: 767px) {
+  .mock-hero { height:auto; min-height:28rem; }
+  .mock-hero .w { padding:16px 16px 28px; }
+  .mock-hero h1 { font-size:24px; line-height:32px; }
+  .mock-header span { display:none; }
+}
+</style>
+<link rel="stylesheet" href="re-lp.css">
+</head><body>
+<header class="mock-header"><b>RailEurope</b><span>Trains</span><span>Rail passes</span><span>Inspiration</span></header>
+<div class="mock-main">
+<section class="mock-hero"><div class="w"><h1>Montpellier, before everyone else</h1></div></section>
+<div class="cms-body-field">
+<div class="re-lp">
+
+<!-- ══════════════════ 1. PRIZE DRAW (intro: media split) ══════════════════ -->
+<section class="sec tint it-intro" aria-labelledby="re-h-win">
+<div class="wrap">
+<div class="media-split">
+<div class="sec-head">
+<h2 id="re-h-win">Win one of 120 €50 rail vouchers</h2>
+<p class="lead">Not Paris. Not Marseille. Montpellier. It’s the South of France city most visitors haven’t found yet, and it’s under 3½ hours from Paris by direct train. Tell us when you’d like to visit for your chance to win one of 120 rail vouchers worth €50 toward your trip.</p>
+<p class="cta"><a class="btn" href="[CAPTURE_PAGE_URL]/?utm_source=raileurope&amp;utm_medium=landing-page&amp;utm_campaign=montpellier-voucher-draw&amp;utm_content=intro-cta">Enter for your chance to win</a></p>
+<p class="small">No purchase necessary. Ends [DATE]. One entry per person. [Eligibility] <a href="[CAPTURE_PAGE_URL]/?utm_source=raileurope&amp;utm_medium=landing-page&amp;utm_campaign=montpellier-voucher-draw&amp;utm_content=official-rules#official-rules">Official rules</a> apply.</p>
+</div>
+<div class="split-img round">
+<picture>
+<source type="image/webp" srcset="../images/montpellier-old-town-street.webp">
+<img src="../images/montpellier-old-town-street.jpg" width="960" height="1280" alt="A sunlit lane in Montpellier’s old town, strung with colorful bunting above café tables and painted steps" decoding="async">
+</picture>
+</div>
+</div>
+</div>
+</section>
+
+<!-- ══════════════════ 2. THE CITY (g3 photo cards) ══════════════════ -->
+<section class="sec" aria-labelledby="re-h-city">
+<div class="wrap">
+<div class="sec-head">
+<h2 id="re-h-city">The South of France city you’ll wish you booked sooner</h2>
+<p class="lead">Montpellier is one of the South of France’s best-kept secrets. It has everything you’d hope for, from Mediterranean sunshine and medieval streets to great food and wine, minus the Riviera crowds. Step off the train at Saint-Roch and you’re right in the heart of it.</p>
+</div>
+<ul class="grid g3" role="list">
+<li class="card media">
+<picture>
+<source type="image/webp" srcset="../images/montpellier-place-de-la-comedie-cafes.webp">
+<img src="../images/montpellier-place-de-la-comedie-cafes.jpg" width="960" height="718" alt="Café terraces in the sun beside the Three Graces fountain on Place de la Comédie" loading="lazy" decoding="async">
+</picture>
+<div class="body">
+<h3>Sunshine and sidewalk cafés</h3>
+<p>Montpellier is one of the sunniest cities in France, so an afternoon at a sidewalk café is never far away, whatever the season.</p>
+</div>
+</li>
+<li class="card media">
+<picture>
+<source type="image/webp" srcset="../images/montpellier-old-town-cathedral-towers.webp">
+<img src="../images/montpellier-old-town-cathedral-towers.jpg" width="960" height="640" alt="A curving old-town street in Montpellier with the towers of Saint-Pierre Cathedral in the distance" loading="lazy" decoding="async">
+</picture>
+<div class="body">
+<h3>History around every corner</h3>
+<p>From the medieval lanes of the Écusson to Saint-Pierre Cathedral and the 18th-century Promenade du Peyrou, centuries of history sit within a short walk of each other.</p>
+</div>
+</li>
+<li class="card media">
+<picture>
+<source type="image/webp" srcset="../images/montpellier-oysters.webp">
+<img src="../images/montpellier-oysters.jpg" width="960" height="639" alt="Fresh oysters on a platter with lemon wedges, one being squeezed over an oyster" loading="lazy" decoding="async">
+</picture>
+<div class="body">
+<h3>Food, wine and the coast</h3>
+<p>Taste fresh oysters from the nearby Thau lagoon and Languedoc wines at Les Halles Castellane, or hop on a train to the seaside town of Sète, just 20 minutes away.</p>
+</div>
+</li>
+</ul>
+</div>
+</section>
+
+<!-- ══════════════════ 3. ITINERARY (journey, 3 stops) ══════════════════ -->
+<section class="sec tint" aria-labelledby="re-h-days">
+<div class="wrap">
+<div class="sec-head">
+<h2 id="re-h-days">Two or three days in Montpellier</h2>
+<p class="lead">A simple plan for your first visit. Everything on days one and two is walkable from the station.</p>
+</div>
+<ol class="journey n3" role="list">
+<li class="stop">
+<span class="no" aria-hidden="true">1</span>
+<div class="box">
+<p class="day">Day 1</p>
+<h3>A classic first day</h3>
+<p>Start with coffee in Place de la Comédie, then spend the afternoon at the Fabre Museum, one of France’s great art museums. Finish the day with dinner in the old town.</p>
+</div>
+</li>
+<li class="stop">
+<span class="no" aria-hidden="true">2</span>
+<div class="box">
+<p class="day">Day 2</p>
+<h3>Lanes, views and architecture</h3>
+<p>Wander the lanes of the Écusson, then head up to the Promenade du Peyrou for views over the city and the Saint-Clément aqueduct. In the afternoon, stroll through Antigone, Ricardo Bofill’s neoclassical-style district, or catch an exhibition at MO.CO.</p>
+</div>
+</li>
+<li class="stop">
+<span class="no" aria-hidden="true">3</span>
+<div class="box">
+<p class="day">Day 3</p>
+<h3>The coast and vineyards</h3>
+<p>Hop on the train to Sète for its canals, fishing port and a long seafood lunch by the Mediterranean, or visit the Roman arena in Nîmes. You’ll be back in Montpellier in time for a glass of Languedoc wine.</p>
+</div>
+</li>
+</ol>
+<p class="note"><strong>Short on time?</strong> Days one and two make a perfect stop between Paris and Barcelona.</p>
+</div>
+</section>
+
+<!-- ══════════════════ 4. FOOD AND WINE (media split + g3 cards) ══════════════════ -->
+<section class="sec" aria-labelledby="re-h-food">
+<div class="wrap">
+<div class="media-split">
+<div class="sec-head">
+<h2 id="re-h-food">Food and wine</h2>
+<p class="lead">Montpellier sits in the heart of the Languedoc, one of France’s largest wine regions, with the Mediterranean on its doorstep. Eating well here is easy, whether you’re grazing at the market or settling in for a long lunch.</p>
+</div>
+<div class="split-img round">
+<picture>
+<source type="image/webp" srcset="../images/montpellier-wine-terrace.webp">
+<img src="../images/montpellier-wine-terrace.jpg" width="1200" height="800" alt="Friends raising glasses of white wine at a table in warm evening light" loading="lazy" decoding="async">
+</picture>
+</div>
+</div>
+<ul class="grid g3 it-feat" role="list">
+<li class="card">
+<h3>Les Halles Castellane</h3>
+<p>The city’s historic covered market in the old town. Come for cheese, charcuterie and fresh produce, and stay for a glass of wine at the counter.</p>
+</li>
+<li class="card">
+<h3>Oysters and seafood</h3>
+<p>Oysters and mussels from the Thau lagoon, near Sète, are a local favorite. Look out for them on market stalls and restaurant menus across the city.</p>
+</li>
+<li class="card">
+<h3>Languedoc wines</h3>
+<p>Try reds and whites from the vineyards around the city, including Pic Saint-Loup, just to the north. Many bars and restaurants pour local wines by the glass.</p>
+</li>
+</ul>
+</div>
+</section>
+
+<!-- ══════════════════ 5. GETTING AROUND (dark band, step cards) ══════════════════ -->
+<section class="sec dark" aria-labelledby="re-h-around">
+<div class="wrap">
+<div class="sec-head">
+<h2 id="re-h-around">Getting around Montpellier</h2>
+<p class="lead">You won’t need a car. Most of what you’ll want to see is a short walk from the station, and the tram covers the rest.</p>
+</div>
+<ul class="steps it-steps" role="list">
+<li class="step">
+<h3>On foot</h3>
+<p>The center is compact and mostly pedestrian-only. From Saint-Roch station, Place de la Comédie, the Écusson and Antigone are all just minutes away.</p>
+</li>
+<li class="step">
+<h3>By tram</h3>
+<p>Montpellier’s tram network links the center with the rest of the city, with a stop right outside Saint-Roch station. Buy tickets from the machines at each stop.</p>
+</li>
+<li class="step">
+<h3>Arriving at Sud de France?</h3>
+<p>Some high-speed trains stop at Montpellier Sud de France, on the edge of the city. Just hop on tram line 1 and you’ll be in the center in about 20 minutes.</p>
+</li>
+</ul>
+</div>
+</section>
+
+<!-- ══════════════════ 6. DAY TRIPS (board, 3 + 2) ══════════════════ -->
+<section class="sec" aria-labelledby="re-h-trips">
+<div class="wrap">
+<div class="sec-head">
+<h2 id="re-h-trips">Day trips by train</h2>
+<p class="lead">Montpellier makes a great base for exploring the South of France, including places many visitors to France never reach. Leave after breakfast and be back in time for dinner.</p>
+</div>
+<ul class="board trips" role="list">
+<li class="board-col">
+<h3>Sète</h3>
+<div class="in">
+<p class="time">About 20 minutes</p>
+<p>Canals, a working fishing port and tielle, the town’s spicy octopus pie.</p>
+</div>
+</li>
+<li class="board-col">
+<h3>Nîmes</h3>
+<div class="in">
+<p class="time">About 30 minutes</p>
+<p>A remarkably well-preserved Roman arena and the Maison Carrée temple.</p>
+</div>
+</li>
+<li class="board-col">
+<h3>Arles</h3>
+<div class="in">
+<p class="time">About 1 hour</p>
+<p>Roman monuments and the streets and cafés Van Gogh painted.</p>
+</div>
+</li>
+<li class="board-col">
+<h3>Avignon</h3>
+<div class="in">
+<p class="time">About 1 hour</p>
+<p>The Palais des Papes and the famous half-bridge over the Rhône.</p>
+</div>
+</li>
+<li class="board-col">
+<h3>Carcassonne</h3>
+<div class="in">
+<p class="time">Under 2 hours</p>
+<p>A fairytale walled city, one of the most complete medieval fortresses in Europe.</p>
+</div>
+</li>
+</ul>
+</div>
+</section>
+
+<!-- ══════════════════ 7. GETTING THERE (media split + reservation-style rows) ══════════════════ -->
+<section class="sec tint" aria-labelledby="re-h-there">
+<div class="wrap">
+<div class="media-split">
+<div class="sec-head">
+<h2 id="re-h-there">Getting to Montpellier by train</h2>
+<p class="lead">Flying into Paris? Montpellier sits on France’s high-speed network, with direct trains from the city and the airport, plus Barcelona, Lyon and Marseille.</p>
+</div>
+<div class="split-img round">
+<picture>
+<source type="image/webp" srcset="../images/high-speed-train-south-of-france.webp">
+<img src="../images/high-speed-train-south-of-france.jpg" width="1200" height="800" alt="A high-speed train crossing open countryside under a clear blue sky" loading="lazy" decoding="async">
+</picture>
+</div>
+</div>
+<ul class="resv" role="list">
+<li class="row"><span class="t">From Paris</span> <span class="tag">under 3½ hours</span></li>
+<li class="row"><span class="t">From Paris Charles de Gaulle Airport</span> <span class="tag">[direct trains, check time]</span></li>
+<li class="row"><span class="t">From Barcelona</span> <span class="tag">about 3 hours</span></li>
+<li class="row"><span class="t">From Lyon or Marseille</span> <span class="tag">under 2 hours</span></li>
+</ul>
+<p class="note">High-speed trains in France require a seat reservation, and it’s included when you book a standard ticket with Rail Europe.</p>
+<p class="cta"><a class="btn" href="https://www.raileurope.com/en-us/destinations/trains-to-montpellier">Find trains to Montpellier</a></p>
+</div>
+</section>
+
+<!-- ══════════════════ 8. CLOSING (red final band) ══════════════════ -->
+<section class="final" aria-labelledby="re-h-final">
+<div class="wrap">
+<h2 id="re-h-final">Montpellier, before everyone else.</h2>
+<p>Enter by [DATE] for your chance to win one of 120 rail vouchers worth €50, then start planning your trip.</p>
+<p class="cta"><a class="btn light" href="[CAPTURE_PAGE_URL]/?utm_source=raileurope&amp;utm_medium=landing-page&amp;utm_campaign=montpellier-voucher-draw&amp;utm_content=closing-cta">Enter for your chance to win</a></p>
+</div>
+</section>
+
+<!-- ══════════════════ PARTNER STRIP ══════════════════ -->
+<div class="partner">
+<div class="wrap">
+<p>In partnership with <span class="logo">[Montpellier Destination Languedoc logo]</span></p>
+</div>
+</div>
+
+</div><!-- /.re-lp -->
+
+</div>
+</div>
+<footer class="mock-footer">Rail Europe CMS footer</footer>
+</body></html>

@@ -1,0 +1,452 @@
+/* Rail Europe – Montpellier landing page – FINAL (d-final)
+   Editorial layout in the live raileurope.com palette: red, ink/black, white and cool
+   neutrals only. The page opens and closes with a ticket: a white prize ticket with the
+   street photo as its stub, and a red voucher ticket with a barcode stub on black.
+   Hairline rules instead of boxed cards; black is reserved for two full-bleed moments.
+   No pin shapes. Everything is scoped to .re-lp. No JavaScript, no SVG, no external assets. */
+
+/* ---------- 1. Tokens ---------- */
+.re-lp {
+  --re-red: #EB0055;
+  --re-red-deep: #990239;          /* small red text and hover */
+  --re-ink: #16181D;
+  --re-slate: #454E5E;             /* body text, as on the live site (8.4:1 on white) */
+  --re-white: #FFFFFF;
+  --re-tint: #F5F5F8;              /* cool grey band */
+  --re-tint-2: #F0F0F5;            /* slightly deeper cool grey (prize section) */
+  --re-black: #000000;
+  --re-line: rgba(22, 24, 29, .12);
+  --re-line-strong: rgba(22, 24, 29, .28);
+  --re-line-dark: rgba(255, 255, 255, .22);
+  --re-on-dark: #C9CBD1;           /* body text on black (12:1) */
+
+  --re-sans: "Inter", Arial, sans-serif;
+  --re-display: "Georama", "Inter", Arial, sans-serif;
+
+  --re-max: 1440px;                         /* matches the CMS hero wrap */
+  --re-pad: clamp(20px, 3vw, 32px);         /* matches the CMS hero gutter */
+  --re-gap: clamp(16px, 2vw, 32px);
+  --re-edge: max(var(--re-pad), calc((100vw - var(--re-max)) / 2 + var(--re-pad)));
+  --re-space: clamp(72px, 8vw, 144px);      /* section rhythm */
+  --re-r: clamp(48px, 7vw, 140px);          /* one large rounded corner on editorial photos */
+  --re-radius: 8px;                         /* small UI, as on the live site */
+
+  container-type: inline-size;
+  display: block;
+  overflow-x: clip;
+  font: 400 1.0625rem/1.65 var(--re-sans);
+  color: var(--re-slate);
+  background: var(--re-white);
+  -webkit-font-smoothing: antialiased;
+}
+@supports (width: 1cqw) {
+  .re-lp { --re-edge: max(var(--re-pad), calc((100cqw - var(--re-max)) / 2 + var(--re-pad))); }
+}
+
+/* ---------- 2. Guard against the site's global CSS ---------- */
+.re-lp *, .re-lp *::before, .re-lp *::after { box-sizing: border-box; }
+.re-lp :where(h2, h3, p, ul, ol, li, picture) { margin: 0; padding: 0; }
+.re-lp :where(p, li, span, a, strong) {
+  font-family: inherit; font-size: inherit; font-weight: inherit;
+  line-height: inherit; color: inherit; letter-spacing: inherit;
+}
+.re-lp :where(ul, ol) { list-style: none; }
+.re-lp :where(li)::marker { content: none; }
+.re-lp :where(h2, h3) {
+  font-family: var(--re-display); font-weight: 600; color: var(--re-ink);
+  text-transform: none; letter-spacing: -.02em;
+}
+.re-lp :where(a) { text-decoration: none; }
+.re-lp :where(strong) { font-weight: 700; }
+.re-lp picture { display: block; }
+.re-lp .re-img { display: block; width: 100%; height: 100%; object-fit: cover; border: 0; }
+
+/* ---------- 3. Layout primitives ---------- */
+.re-lp .re-wrap { width: 100%; max-width: var(--re-max); margin-inline: auto; padding-inline: var(--re-pad); }
+.re-lp .re-sec { position: relative; padding-block: var(--re-space); background: var(--re-white); }
+.re-lp .re-sec--tint { background: var(--re-tint); }
+.re-lp .re-sec--black { background: var(--re-black); color: var(--re-on-dark); }
+.re-lp .re-sec--black :where(h2, h3) { color: var(--re-white); }
+.re-lp .re-g12 { display: grid; grid-template-columns: repeat(12, minmax(0, 1fr)); column-gap: var(--re-gap); }
+
+/* ---------- 4. Type ---------- */
+.re-lp .re-h2 { font-size: clamp(2.375rem, 1.2rem + 3.4vw, 4.75rem); line-height: 1.03; }
+.re-lp .re-h2--xl { font-size: clamp(2.75rem, 1rem + 4.6vw, 6rem); line-height: .98; letter-spacing: -.03em; }
+.re-lp .re-h3 { font-size: clamp(1.375rem, 1.1rem + .7vw, 1.875rem); line-height: 1.15; letter-spacing: -.01em; }
+.re-lp .re-lead { font-size: clamp(1.125rem, 1rem + .35vw, 1.3125rem); line-height: 1.6; color: var(--re-slate); }
+.re-lp .re-sec--black .re-lead { color: var(--re-on-dark); }
+.re-lp .re-small { font-size: .875rem; line-height: 1.6; color: var(--re-slate); }
+.re-lp .re-small a { color: var(--re-red-deep); font-weight: 600; text-decoration: underline; text-underline-offset: 3px; }
+.re-lp .re-small a:hover { color: var(--re-ink); }
+.re-lp .re-red { color: var(--re-red); }
+
+/* Section heading row: big title on the left, lead pushed right under a short red rule */
+.re-lp .re-head { align-items: end; margin-bottom: clamp(48px, 6vw, 104px); row-gap: 24px; }
+.re-lp .re-head__title { grid-column: 1 / span 7; }
+.re-lp .re-head__lead { grid-column: 9 / -1; padding-top: 22px; position: relative; }
+.re-lp .re-head__lead::before {
+  content: ""; position: absolute; top: 0; left: 0; width: 48px; height: 3px; background: var(--re-red);
+}
+
+/* ---------- 5. Buttons and focus (live-site pills) ---------- */
+.re-lp .re-cta { margin-top: clamp(28px, 3vw, 40px); }
+.re-lp .re-btn {
+  display: inline-flex; align-items: center; gap: 14px; min-height: 56px; padding: 14px 30px;
+  border-radius: 999px; background: var(--re-red); color: var(--re-white);
+  font: 700 1.0625rem/1.2 var(--re-sans); text-decoration: none;
+  transition: background-color .2s ease;
+}
+.re-lp .re-btn::after {   /* thin chevron */
+  content: ""; width: 9px; height: 9px; flex: none; margin-left: 2px;
+  border-top: 2px solid currentColor; border-right: 2px solid currentColor; transform: rotate(45deg);
+}
+.re-lp .re-btn:hover { background: var(--re-red-deep); color: var(--re-white); }
+.re-lp a:focus-visible { outline: 3px solid var(--re-ink); outline-offset: 4px; border-radius: var(--re-radius); }
+.re-lp .re-btn:focus-visible { border-radius: 999px; }
+.re-lp .re-sec--black a:focus-visible { outline-color: var(--re-white); }
+
+/* ---------- 6. Tickets: shared tear-off shape (prize draw at the top, voucher at the close) ---------- */
+.re-lp .re-ticket {
+  --re-stub: clamp(120px, 11vw, 176px);
+  --re-notch: 16px;
+  --re-perf: var(--re-line-strong);
+  position: relative; display: grid; grid-template-columns: minmax(0, 1fr) var(--re-stub);
+}
+.re-lp .re-ticket__main {
+  position: relative; background: var(--re-white); border-radius: 16px 0 0 16px;
+  /* half-circle notches where the stub tears off */
+  -webkit-mask:
+    radial-gradient(circle at 100% 0, transparent var(--re-notch), #000 calc(var(--re-notch) + .5px)) top / 100% 51% no-repeat,
+    radial-gradient(circle at 100% 100%, transparent var(--re-notch), #000 calc(var(--re-notch) + .5px)) bottom / 100% 51% no-repeat;
+          mask:
+    radial-gradient(circle at 100% 0, transparent var(--re-notch), #000 calc(var(--re-notch) + .5px)) top / 100% 51% no-repeat,
+    radial-gradient(circle at 100% 100%, transparent var(--re-notch), #000 calc(var(--re-notch) + .5px)) bottom / 100% 51% no-repeat;
+}
+.re-lp .re-ticket__main::after {   /* perforation */
+  content: ""; position: absolute; right: 0;
+  top: calc(var(--re-notch) + 12px); bottom: calc(var(--re-notch) + 12px); width: 2px;
+  background: repeating-linear-gradient(180deg, var(--re-perf) 0 6px, transparent 6px 13px);
+}
+.re-lp .re-ticket__stub {
+  position: relative; display: grid; place-items: center;
+  background: var(--re-white); border-radius: 0 16px 16px 0;
+  -webkit-mask:
+    radial-gradient(circle at 0 0, transparent var(--re-notch), #000 calc(var(--re-notch) + .5px)) top / 100% 51% no-repeat,
+    radial-gradient(circle at 0 100%, transparent var(--re-notch), #000 calc(var(--re-notch) + .5px)) bottom / 100% 51% no-repeat;
+          mask:
+    radial-gradient(circle at 0 0, transparent var(--re-notch), #000 calc(var(--re-notch) + .5px)) top / 100% 51% no-repeat,
+    radial-gradient(circle at 0 100%, transparent var(--re-notch), #000 calc(var(--re-notch) + .5px)) bottom / 100% 51% no-repeat;
+}
+
+/* ---------- 7. Prize draw: white ticket, street photo as the stub ---------- */
+.re-lp .re-draw { background: var(--re-tint-2); padding-block: clamp(40px, 4vw, 64px) clamp(72px, 7vw, 120px); }
+.re-lp .re-draw .re-g12 { align-items: start; }
+.re-lp .re-draw .re-ticket {
+  --re-stub: clamp(280px, 32%, 420px);
+  grid-column: 2 / span 10; z-index: 1;
+  filter: drop-shadow(0 18px 40px rgba(22, 24, 29, .12));
+}
+/* the street photo fills the stub end of the ticket */
+.re-lp .re-ticket__stub--photo { overflow: hidden; }
+.re-lp .re-ticket__stub--photo picture { position: absolute; inset: 0; }
+.re-lp .re-ticket__stub--photo .re-img { object-position: 50% 42%; }
+.re-lp .re-draw .re-ticket__main { padding: clamp(28px, 3.2vw, 52px) clamp(28px, 3.6vw, 56px); }
+.re-lp .re-ticket__title {
+  font-size: clamp(2.25rem, 1rem + 3.2vw, 4.25rem); line-height: 1; letter-spacing: -.03em;
+  max-width: 17ch; margin-bottom: clamp(14px, 1.4vw, 22px);
+}
+.re-lp .re-draw .re-lead { max-width: 70ch; font-size: clamp(1.0625rem, 1rem + .25vw, 1.1875rem); }
+/* CTA and small print share one row to keep the ticket low */
+.re-lp .re-draw__act { display: flex; flex-wrap: wrap; align-items: center; gap: 12px 28px; margin-top: clamp(20px, 2vw, 28px); }
+.re-lp .re-draw__act .re-cta { margin-top: 0; }
+.re-lp .re-draw__act .re-small { flex: 1 1 260px; max-width: 42ch; }
+
+/* ---------- 8. The city: three stories at three scales ---------- */
+.re-lp .re-stories { row-gap: clamp(64px, 8vw, 128px); }
+.re-lp .re-story picture { overflow: hidden; }
+.re-lp .re-story__body { margin-top: 24px; max-width: 30em; }
+.re-lp .re-story__body .re-h3 { margin-bottom: 10px; }
+.re-lp .re-story--a { grid-column: 1 / span 7; }
+.re-lp .re-story--a picture { aspect-ratio: 4 / 3; border-radius: 0 var(--re-r) 0 0; }
+.re-lp .re-story--b { grid-column: 9 / -1; margin-top: clamp(80px, 14vw, 240px); }
+.re-lp .re-story--b picture { aspect-ratio: 4 / 5; border-radius: var(--re-r) 0 0 0; }
+.re-lp .re-story--b .re-img { object-position: 62% 50%; }
+/* third story: image bleeds off the right edge, text sits beside it */
+.re-lp .re-story--c { grid-column: 1 / -1; display: grid; grid-template-columns: subgrid; align-items: end; }
+.re-lp .re-story--c picture {
+  grid-column: 5 / -1; grid-row: 1; aspect-ratio: 16 / 9;
+  margin-right: calc(-1 * var(--re-edge)); border-radius: var(--re-r) 0 0 0;
+}
+.re-lp .re-story--c .re-story__body { grid-column: 1 / span 3; grid-row: 1; margin-top: 0; }
+
+/* ---------- 9. Itinerary: oversized red numerals over staggered hairlines ---------- */
+.re-lp .re-days__list { row-gap: 56px; }
+.re-lp .re-day { grid-column: span 4; position: relative; padding-top: 28px; border-top: 1px solid var(--re-ink); }
+.re-lp .re-day:nth-child(2) { margin-top: clamp(0px, 5vw, 96px); }
+.re-lp .re-day:nth-child(3) { margin-top: clamp(0px, 10vw, 192px); }
+.re-lp .re-day__num {
+  display: block; margin-bottom: 8px;
+  font: 600 clamp(6rem, 4rem + 6vw, 11rem)/.8 var(--re-display); letter-spacing: -.05em; color: var(--re-red);
+}
+.re-lp .re-day__label {
+  margin-bottom: 10px; font-size: .8125rem; font-weight: 700; letter-spacing: .14em; text-transform: uppercase; color: var(--re-red-deep);
+}
+.re-lp .re-day .re-h3 { margin-bottom: 14px; }
+.re-lp .re-quote {
+  max-width: 22em; margin: clamp(72px, 8vw, 128px) 0 0 calc((100% + var(--re-gap)) / 12 * 4);
+  padding-left: 28px; border-left: 3px solid var(--re-red);
+  font: 600 clamp(1.5rem, 1.1rem + 1.2vw, 2.25rem)/1.25 var(--re-display); letter-spacing: -.01em; color: var(--re-ink);
+}
+.re-lp .re-quote strong { color: var(--re-red-deep); font-weight: 600; }
+
+/* ---------- 10. Food and wine: full-bleed black moment ---------- */
+.re-lp .re-food { padding-top: 0; }
+.re-lp .re-food__top {
+  /* photo column capped at 1200px so the 1200px source never upscales */
+  display: grid; grid-template-columns: minmax(0, min(62%, 1200px)) minmax(0, 1fr); align-items: end;
+  margin-bottom: clamp(64px, 7vw, 120px);
+}
+.re-lp .re-food__media { position: relative; grid-column: 1; grid-row: 1; height: clamp(520px, 46vw, 800px); }
+.re-lp .re-food__media::after {   /* scrim that melts the photo into the black */
+  content: ""; position: absolute; inset: 0;
+  background: linear-gradient(90deg, rgba(0,0,0,0) 48%, rgba(0,0,0,.8) 86%, #000 100%),
+              linear-gradient(0deg, #000 0%, rgba(0,0,0,.5) 18%, rgba(0,0,0,0) 40%);
+}
+.re-lp .re-food__head {
+  grid-column: 2; grid-row: 1; position: relative; z-index: 1;
+  padding: 0 var(--re-edge) clamp(16px, 3vw, 56px) 0;
+  margin-left: calc(-1 * clamp(80px, 12vw, 260px));
+}
+.re-lp .re-food__head .re-h2 { font-size: clamp(2.75rem, 1rem + 4.6vw, 6rem); line-height: .98; letter-spacing: -.03em; margin-bottom: 28px; }
+.re-lp .re-food__head .re-lead { max-width: 30em; }
+
+/* Food items: columns on black, hairline with a red tick */
+.re-lp .re-cols { row-gap: 48px; }
+.re-lp .re-col { grid-column: span 4; }
+.re-lp .re-col .re-h3 { margin-bottom: 12px; }
+.re-lp .re-cols--dark .re-col { position: relative; padding-top: 24px; border-top: 1px solid var(--re-line-dark); }
+.re-lp .re-cols--dark .re-col::before {
+  content: ""; position: absolute; top: -2px; left: 0; width: 48px; height: 3px; background: var(--re-red);
+}
+
+/* ---------- 11. Getting around: a map legend (key line above each heading) ---------- */
+.re-lp .re-legend__item { position: relative; padding-top: 44px; }
+.re-lp .re-legend__item::before { content: ""; position: absolute; top: 0; left: 0; right: 0; height: 14px; }
+.re-lp .re-legend__item .re-h3 { font-size: clamp(1.5rem, 1.1rem + 1.1vw, 2.25rem); margin-bottom: 14px; }
+/* on foot: dotted ink line */
+.re-lp .re-legend__item--foot::before {
+  background: radial-gradient(circle, var(--re-ink) 0 2px, transparent 2.5px) 0 50% / 10px 10px repeat-x;
+}
+/* by tram: red track with sleepers */
+.re-lp .re-legend__item--tram::before {
+  background:
+    linear-gradient(var(--re-red), var(--re-red)) 0 50% / 100% 2px no-repeat,
+    repeating-linear-gradient(90deg, var(--re-red) 0 2px, transparent 2px 12px) 0 50% / 100% 12px no-repeat;
+}
+/* transfer: dashed ink line ending in an arrowhead */
+.re-lp .re-legend__item--link::before {
+  right: 4px;
+  background: repeating-linear-gradient(90deg, var(--re-ink) 0 10px, transparent 10px 17px) 0 50% / 100% 2px no-repeat;
+}
+.re-lp .re-legend__item--link::after {
+  content: ""; position: absolute; top: 2px; right: 3px; width: 10px; height: 10px;
+  border-top: 2px solid var(--re-ink); border-right: 2px solid var(--re-ink); transform: rotate(45deg);
+}
+
+/* ---------- 12. Day trips: branches off a red spine, scaled to journey time (2 h = full reach) ---------- */
+.re-lp .re-trips .re-g12 { align-items: start; }
+.re-lp .re-trips__head { grid-column: 1 / span 4; position: sticky; top: 72px; }
+.re-lp .re-trips__head .re-h2 { margin-bottom: 24px; }
+.re-lp .re-trips__list {
+  --re-p: clamp(24px, 2.5vw, 40px);                      /* spine to text */
+  --re-reach: calc(100cqw - var(--re-p) - 200px);        /* longest branch */
+  grid-column: 6 / -1; position: relative; container-type: inline-size;
+}
+.re-lp .re-trips__list::before {   /* the section's own short spine */
+  content: ""; position: absolute; left: 0; top: 0; bottom: 0; width: 2px; background: var(--re-red);
+}
+.re-lp .re-trip--20  { --re-t: .1667; }
+.re-lp .re-trip--30  { --re-t: .25; }
+.re-lp .re-trip--60  { --re-t: .5; }
+.re-lp .re-trip--120 { --re-t: 1; }
+.re-lp .re-trip {
+  position: relative; display: grid; grid-template-columns: minmax(0, 1fr);
+  padding: clamp(24px, 2.5vw, 36px) 0 clamp(24px, 2.5vw, 36px) var(--re-p);
+}
+.re-lp .re-trip + .re-trip::before {   /* hairline between rows, starting off the spine */
+  content: ""; position: absolute; top: 0; left: var(--re-p); right: 0; height: 1px; background: var(--re-line);
+}
+.re-lp .re-trip .re-h3 { font-size: clamp(2rem, 1.2rem + 2.2vw, 3.5rem); line-height: 1.05; letter-spacing: -.03em; }
+.re-lp .re-trip__time {
+  position: relative; justify-self: start;
+  margin: 14px 0 12px calc(var(--re-t) * var(--re-reach) + 14px);
+  padding: 6px 14px; border-radius: 999px; background: var(--re-ink); color: var(--re-white);
+  font-size: .875rem; font-weight: 700; line-height: 20px; white-space: nowrap; font-variant-numeric: tabular-nums;
+}
+.re-lp .re-trip__time::before {   /* the branch, from the spine to the stop */
+  content: ""; position: absolute; top: 50%; right: calc(100% + 14px); height: 2px; margin-top: -1px;
+  width: calc(var(--re-p) + var(--re-t) * var(--re-reach)); background: var(--re-red);
+}
+.re-lp .re-trip__time::after {   /* the stop: a plain red dot */
+  content: ""; position: absolute; top: 50%; right: calc(100% + 4px); width: 12px; height: 12px; margin-top: -6px;
+  border-radius: 50%; background: var(--re-red);
+}
+.re-lp .re-trip__text { max-width: 34em; }
+.re-lp .re-trip:last-child .re-trip__text { position: relative; }
+.re-lp .re-trip:last-child .re-trip__text::before {   /* ends the spine at the last branch */
+  content: ""; position: absolute; left: calc(-1 * var(--re-p)); top: -27px; bottom: calc(-1 * clamp(24px, 2.5vw, 36px) - 1px);
+  width: 2px; background: var(--re-tint);
+}
+
+/* ---------- 13. Getting there: train image bleeds off the right edge ---------- */
+.re-lp .re-there .re-g12 { align-items: center; }
+.re-lp .re-there__text { grid-column: 1 / span 5; grid-row: 1; }
+.re-lp .re-there__text .re-h2 { margin-bottom: 24px; }
+.re-lp .re-there__media {
+  grid-column: 7 / -1; grid-row: 1; aspect-ratio: 4 / 3; max-width: 1200px;
+  margin-right: calc(-1 * var(--re-edge));
+}
+.re-lp .re-there__media .re-img { border-radius: var(--re-r) 0 0 0; object-position: 35% 50%; }
+.re-lp .re-times { margin: 32px 0 20px; border-top: 1px solid var(--re-ink); }
+.re-lp .re-times li {
+  display: flex; flex-wrap: wrap; justify-content: space-between; gap: 4px 24px;
+  padding: 14px 0; border-bottom: 1px solid var(--re-line);
+}
+.re-lp .re-times__from { color: var(--re-slate); }
+.re-lp .re-times__dur { font-weight: 700; color: var(--re-ink); }
+
+/* ---------- 14. Closing CTA: the red voucher ticket on black ---------- */
+.re-lp .re-final { padding-block: clamp(80px, 8vw, 136px); }
+.re-lp .re-ticket--red { --re-stub: clamp(112px, 12vw, 200px); --re-perf: rgba(255, 255, 255, .6); }
+.re-lp .re-ticket--red .re-ticket__main {
+  display: grid; grid-template-columns: minmax(0, 7fr) minmax(0, 4fr); align-items: end; column-gap: clamp(24px, 4vw, 72px); row-gap: 28px;
+  padding: clamp(36px, 5vw, 80px) clamp(28px, 4.4vw, 72px); background: var(--re-red); color: var(--re-white);
+}
+.re-lp .re-ticket--red .re-final__title {
+  color: var(--re-white); font-size: clamp(2.75rem, 1rem + 5vw, 6.75rem); line-height: .95; letter-spacing: -.035em;
+}
+.re-lp .re-ticket--red .re-lead { color: var(--re-white); }
+.re-lp .re-ticket--red a:focus-visible { outline-color: var(--re-white); }
+/* stub: a printed barcode */
+.re-lp .re-ticket__stub--code {
+  background:
+    repeating-linear-gradient(180deg,
+      var(--re-white) 0 3px, transparent 3px 6px, var(--re-white) 6px 7px, transparent 7px 10px,
+      var(--re-white) 10px 14px, transparent 14px 16px, var(--re-white) 16px 17px, transparent 17px 21px)
+      50% 50% / 44% 62% no-repeat,
+    var(--re-red);
+}
+/* white pill with red text on the red ticket */
+.re-lp a.re-btn--light { background: var(--re-white); color: var(--re-red-deep); }
+.re-lp a.re-btn--light:hover { background: var(--re-ink); color: var(--re-white); }
+
+/* ---------- 15. Partner strip ---------- */
+.re-lp .re-partner { padding-block: 40px; background: var(--re-white); border-top: 1px solid var(--re-line); }
+.re-lp .re-partner p { text-align: center; font-size: .875rem; color: var(--re-slate); }
+.re-lp .re-partner__logo { display: inline-block; margin-left: 8px; font-weight: 600; color: var(--re-ink); }
+
+/* ---------- 16. Small desktop / tablet: prize ticket spans the full grid ---------- */
+@media (max-width: 1199px) {
+  .re-lp .re-draw .re-ticket { grid-column: 1 / -1; --re-stub: 34%; }
+  .re-lp .re-ticket--red .re-ticket__main { grid-template-columns: minmax(0, 1fr); }
+}
+@media (max-width: 1023px) {
+  .re-lp .re-head__title { grid-column: 1 / -1; }
+  .re-lp .re-head__lead { grid-column: 1 / span 9; }
+  .re-lp .re-story--a { grid-column: 1 / span 8; }
+  .re-lp .re-story--b { grid-column: 7 / -1; margin-top: 0; }
+  .re-lp .re-story--c picture { grid-column: 1 / -1; grid-row: 1; }
+  .re-lp .re-story--c .re-story__body { grid-column: 1 / span 8; grid-row: 2; margin-top: 24px; }
+  .re-lp .re-trips__head { grid-column: 1 / -1; position: static; margin-bottom: 48px; }
+  .re-lp .re-trips__list { grid-column: 1 / -1; }
+  .re-lp .re-there__text { grid-column: 1 / span 7; }
+  .re-lp .re-there__media { grid-column: 8 / -1; }
+}
+
+/* ---------- 17. Mobile ---------- */
+@media (max-width: 719px) {
+  .re-lp .re-g12 { grid-template-columns: minmax(0, 1fr); }
+  .re-lp .re-g12 > * { grid-column: 1 / -1 !important; grid-row: auto !important; }
+  .re-lp .re-head { margin-bottom: 40px; }
+
+  /* prize: perforation runs across, the photo stub becomes a short band below */
+  .re-lp .re-draw { padding-block: 20px 56px; }
+  .re-lp .re-draw .re-ticket { margin: 0 calc(-1 * var(--re-pad) + 8px); --re-stub: clamp(132px, 40vw, 170px); }
+  .re-lp .re-ticket { --re-notch: 12px; --re-stub: 64px; grid-template-columns: minmax(0, 1fr); grid-template-rows: auto var(--re-stub); }
+  .re-lp .re-draw .re-ticket__main { padding: 26px 20px 28px; }
+  .re-lp .re-ticket__main {
+    border-radius: 16px 16px 0 0;
+    -webkit-mask:
+      radial-gradient(circle at 0 100%, transparent var(--re-notch), #000 calc(var(--re-notch) + .5px)) left / 51% 100% no-repeat,
+      radial-gradient(circle at 100% 100%, transparent var(--re-notch), #000 calc(var(--re-notch) + .5px)) right / 51% 100% no-repeat;
+            mask:
+      radial-gradient(circle at 0 100%, transparent var(--re-notch), #000 calc(var(--re-notch) + .5px)) left / 51% 100% no-repeat,
+      radial-gradient(circle at 100% 100%, transparent var(--re-notch), #000 calc(var(--re-notch) + .5px)) right / 51% 100% no-repeat;
+  }
+  .re-lp .re-ticket__main::after {
+    top: auto; bottom: 0; left: calc(var(--re-notch) + 10px); right: calc(var(--re-notch) + 10px); width: auto; height: 2px;
+    background: repeating-linear-gradient(90deg, var(--re-perf) 0 6px, transparent 6px 13px);
+  }
+  .re-lp .re-ticket__stub {
+    border-radius: 0 0 16px 16px;
+    -webkit-mask:
+      radial-gradient(circle at 0 0, transparent var(--re-notch), #000 calc(var(--re-notch) + .5px)) left / 51% 100% no-repeat,
+      radial-gradient(circle at 100% 0, transparent var(--re-notch), #000 calc(var(--re-notch) + .5px)) right / 51% 100% no-repeat;
+            mask:
+      radial-gradient(circle at 0 0, transparent var(--re-notch), #000 calc(var(--re-notch) + .5px)) left / 51% 100% no-repeat,
+      radial-gradient(circle at 100% 0, transparent var(--re-notch), #000 calc(var(--re-notch) + .5px)) right / 51% 100% no-repeat;
+  }
+  .re-lp .re-ticket__title { font-size: clamp(2rem, 1.2rem + 4vw, 2.5rem); margin-bottom: 12px; }
+  .re-lp .re-draw__act { margin-top: 20px; }
+  .re-lp .re-draw__act .re-cta, .re-lp .re-draw__act .re-small { flex-basis: 100%; }
+
+  .re-lp .re-final { padding-block: 56px; }
+  .re-lp .re-final .re-ticket { margin: 0 calc(-1 * var(--re-pad) + 8px); }
+  .re-lp .re-ticket--red { --re-stub: 72px; }
+  .re-lp .re-ticket--red .re-ticket__main { padding: 32px 22px 30px; row-gap: 20px; }
+  .re-lp .re-ticket--red .re-final__title { font-size: clamp(2.5rem, 1.4rem + 5vw, 3rem); }
+  .re-lp .re-ticket__stub--code {
+    background:
+      repeating-linear-gradient(90deg,
+        var(--re-white) 0 3px, transparent 3px 6px, var(--re-white) 6px 7px, transparent 7px 10px,
+        var(--re-white) 10px 14px, transparent 14px 16px, var(--re-white) 16px 17px, transparent 17px 21px)
+        50% 50% / 62% 44% no-repeat,
+      var(--re-red);
+  }
+
+  .re-lp .re-stories { row-gap: 56px; }
+  .re-lp .re-story--a, .re-lp .re-story--c { margin-inline: calc(-1 * var(--re-pad)); }
+  .re-lp .re-story--a .re-story__body, .re-lp .re-story--c .re-story__body { padding-inline: var(--re-pad); }
+  .re-lp .re-story--b { width: 86%; justify-self: end; }
+  .re-lp .re-story--b picture { aspect-ratio: 1; }
+  .re-lp .re-story--c { display: block; }
+  .re-lp .re-story--c picture { margin-right: 0; }
+
+  .re-lp .re-day:nth-child(n) { margin-top: 0; }
+  .re-lp .re-day__num { font-size: 4.5rem; }
+  .re-lp .re-days__list { row-gap: 40px; }
+  .re-lp .re-quote { margin-left: 0; padding-left: 20px; font-size: 1.375rem; }
+
+  .re-lp .re-food__top { grid-template-columns: minmax(0, 1fr); margin-bottom: 56px; }
+  .re-lp .re-food__media { height: auto; aspect-ratio: 4 / 3; }
+  .re-lp .re-food__media::after { background: linear-gradient(0deg, #000 0%, rgba(0,0,0,.55) 30%, rgba(0,0,0,0) 60%); }
+  .re-lp .re-food__head { grid-column: 1; grid-row: 2; margin: -72px 0 0; padding: 0 var(--re-pad); }
+  .re-lp .re-col { grid-column: 1 / -1; }
+
+  .re-lp .re-trips__list { --re-p: 20px; --re-reach: calc(100cqw - var(--re-p) - 170px); }
+
+  .re-lp .re-there__media { order: -1; margin: 0 calc(-1 * var(--re-pad)) 40px var(--re-gap); aspect-ratio: 4 / 3; }
+
+  .re-lp .re-btn { width: 100%; justify-content: center; padding: 14px 20px; font-size: 1rem; }
+}
+
+/* ---------- 18. Very narrow phones (320px): keep the CTA labels on one line ---------- */
+@media (max-width: 359px) {
+  .re-lp .re-btn { padding: 14px 16px; gap: 10px; font-size: .9375rem; }
+  .re-lp .re-draw .re-ticket__main, .re-lp .re-ticket--red .re-ticket__main { padding-inline: 16px; }
+}
+
+/* ---------- 19. Motion ---------- */
+@media (prefers-reduced-motion: reduce) {
+  .re-lp *, .re-lp *::before, .re-lp *::after { transition: none !important; animation: none !important; }
+}
