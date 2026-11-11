@@ -2,7 +2,7 @@
    MONTPELLIER, BEFORE EVERYONE ELSE — Rail Europe CMS landing block
    Built in the same component vocabulary as the live rail-101 / Italy
    guides (.sec, .sec-head, .card, .media-split, .journey, .board, .resv,
-   .note, .final). Every selector is scoped under .re-lp. No icons, no SVG.
+   .note, .final). Every selector is scoped under .re-lp. No icons, no vector graphics.
    ════════════════════════════════════════════════════════════════════ */
 
 /* ── TOKENS ── */
@@ -237,8 +237,12 @@
 
 /* ── PARTNER STRIP ── */
 .re-lp .partner { background: var(--paper); border-top: 1px solid var(--line); padding: 1.6rem 0; text-align: center; }
-.re-lp .partner p { font-size: .95rem; color: var(--slate); margin: 0; }
-.re-lp .partner .logo { font-weight: 700; color: var(--ink); }
+.re-lp .partner p {
+  display: flex; flex-wrap: wrap; align-items: center; justify-content: center; gap: .6rem 1.25rem;
+  font-size: .95rem; color: var(--slate); margin: 0;
+}
+.re-lp .partner picture { display: block; }
+.re-lp .partner img.logo { display: block; width: 180px; max-width: 100%; height: auto; }
 
 /* ── RESPONSIVE ── */
 @media (max-width: 900px) {
@@ -263,6 +267,7 @@
   .re-lp .g3, .re-lp .steps, .re-lp .board { grid-template-columns: 1fr; }
   .re-lp .board-col:last-child { grid-column: auto; }
   .re-lp .resv .row { flex-direction: column; align-items: flex-start; gap: .5rem; }
+  .re-lp .partner img.logo { width: 150px; }
 }
 @media (prefers-reduced-motion: reduce) {
   .re-lp *, .re-lp *::before, .re-lp *::after { transition: none !important; }
